@@ -21,13 +21,14 @@ interface MediumFeedItem {
 
 export async function GET() {
   try {
-    const parser: Parser<{}, MediumItem> = new Parser({
-      customFields: {
-        item: [
-          ['content:encoded', 'content'],
-        ],
-      },
-    });
+    const parser: Parser<object, MediumItem> = new Parser({
+    customFields: {
+      item: [
+        ['content:encoded', 'content'],
+      ],
+    },
+  });
+
 
     const feed = await parser.parseURL(
       'https://medium.com/feed/@centauryy'

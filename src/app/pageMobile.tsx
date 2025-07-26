@@ -4,7 +4,7 @@ import SearchModal from "./SearchModal";
 import ArticleCard from "./cardArticel";
 import { useState } from "react";
 import useMediumPosts from "../../hooks/useMediumPosts";
-import { Loader2, AlertCircle, Search } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 const HomePageMobile = () => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);

@@ -1,16 +1,17 @@
-// components/ArticleCard.tsx
+// src/app/cardArticel.tsx
 "use client";
 
-import { Calendar, ExternalLink, Tag } from 'lucide-react';
-import { MediumPost } from '../app/types';
+import { ExternalLink } from 'lucide-react';
+import { MediumPost } from './types'; // Fix import path
+import Image from 'next/image'; // ← ADD THIS IMPORT
 
 interface ArticleCardProps {
   post?: MediumPost;
-  variant?: 'default' | 'featured' | 'compact' | 'horizontal'; // Tambahkan 'horizontal'
+  variant?: 'default' | 'featured' | 'compact' | 'horizontal';
   className?: string;
 }
 
-export default function ArticleCard({ post, variant = 'default', className = '' }: ArticleCardProps) {  // Fallback data if no post provided (for maintaining existing design)
+export default function ArticleCard({ post, variant = 'default', className = '' }: ArticleCardProps) {
   const fallbackPost = {
     title: "Sample Article Title",
     excerpt: "This is a sample excerpt for the article that shows how content will be displayed...",
@@ -27,7 +28,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
       const date = new Date(dateString);
       return date.toLocaleDateString('en-US', { 
         month: 'short', 
-        day: 'numeric', 
+        day: 'numeric',
         year: 'numeric' 
       });
     } catch {
@@ -41,32 +42,37 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
     }
   };
 
+  // Varian Horizontal untuk Mobile
   if (variant === 'horizontal') {
     return (
       <div 
         onClick={handleCardClick}
         className={`
-          group mx-2 relative flex items-start space-x-3 bg-white cursor-pointer
+          group relative flex items-start space-x-3 bg-white cursor-pointer
           border-2 border-black shadow-[4px_4px_0px_0px_black] 
           hover:shadow-[0px_0px_0_0_black] transition-all duration-200
           hover:translate-x-[3px] hover:translate-y-[3px] p-3
           ${className}
         `}
       >
-        {/* Thumbnail */}
-        <div className="flex-shrink-0 w-24 h-full border-2 border-black overflow-hidden">
+        {/* FIX LINE 59: Thumbnail with Next.js Image */}
+        <div className="flex-shrink-0 w-24 h-24 border-2 border-black overflow-hidden relative">
           {articleData.image ? (
-            <img 
+            <Image 
               src={articleData.image} 
-              alt={articleData.title} 
-              className="w-full h-full object-cover" 
+              alt={articleData.title}
+              fill
+              className="object-cover"
+              sizes="96px"
+              priority={false}
             />
           ) : (
-            <div className="w-full h-24 bg-yellow-100 flex items-center justify-center">
+            <div className="w-full h-full bg-yellow-100 flex items-center justify-center">
               <span className="text-2xl">📄</span>
             </div>
           )}
         </div>
+
         {/* Content */}
         <div className="flex-1 min-w-0">
           <h4 className="font-bold text-base text-black mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
@@ -83,6 +89,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
     );
   }
 
+  // Default variant
   return (
     <div 
       onClick={handleCardClick}
@@ -94,13 +101,16 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
         ${className}
       `}
     >
-      {/* Image Container */}
+      {/* FIX LINE 100: Image Container with Next.js Image */}
       <div className="relative h-40 overflow-hidden">
         {articleData.image ? (
-          <img 
+          <Image 
             src={articleData.image} 
             alt={articleData.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 50vw, 33vw"
+            priority={false}
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
@@ -116,7 +126,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-bold text-lg text-black mb-2 line-clamp-2 group-hover:text-yellow-400 transition-colors">
+        <h3 className="font-bold text-lg text-black mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {articleData.title}
         </h3>
         
@@ -124,13 +134,13 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
           {articleData.excerpt}
         </p>
 
-        {/* Categories - Brutal style */}
+        {/* Categories */}
         {articleData.categories && articleData.categories.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-3">
             {articleData.categories.slice(0, 2).map((category, index) => (
               <span 
                 key={index}
-                className="inline-block border-2 border-black bg-yellow-400 text-black text-xs font-bold px-2 py-1 uppercase tracking-wider"
+                className="inline-block bg-black text-white text-xs font-bold px-2 py-1 uppercase tracking-wider"
               >
                 {category}
               </span>
@@ -138,7 +148,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
           </div>
         )}
 
-        {/* Footer with brutal styling */}
+        {/* Footer */}
         <div className="flex items-center justify-between">
           <div className="text-xs text-gray-600 font-medium uppercase tracking-wider">
             {formatDate(articleData.date)}

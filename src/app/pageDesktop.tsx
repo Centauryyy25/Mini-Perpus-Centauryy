@@ -3,6 +3,7 @@ import BrutalCarousel from "./carousel";
 import SearchModal from "./SearchModal";
 import ArticleCard from "./cardArticel";
 import { useState } from "react";
+import Image from "next/image";
 import useMediumPosts from "../../hooks/useMediumPosts";
 import { Loader2, AlertCircle } from 'lucide-react';
 
@@ -37,7 +38,7 @@ const HomePageDesktop = () => {
     <header className="flex justify-between items-center px-6 py-4 border-b-2 border-black">
       <div className="flex items-center space-x-2">
         <div className="text-2xl">
-          <img src="/asset/Untitled38_20250512074955.png" className="w-10 h-10" alt="🌟" />
+          <Image src="/asset/Untitled38_20250512074955.png" width={10} height={10} className="w-10 h-10" alt="🌟" />
         </div>
         <h1 className="text-xl font-bold font-space bold">Centauryy</h1>
       </div>
