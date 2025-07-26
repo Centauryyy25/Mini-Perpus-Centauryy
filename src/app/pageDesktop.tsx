@@ -1,7 +1,34 @@
 import React from "react";
 import BrutalCarousel from "./carousel";
+import SearchModal from "./SearchModal";
+import ArticleCard from "./cardArticel";
+import { useState } from "react";
+import useMediumPosts from "../../hooks/useMediumPosts";
+import { Loader2, AlertCircle } from 'lucide-react';
 
 const HomePageDesktop = () => {
+
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const { posts, isLoading, error } = useMediumPosts();
+
+  const handleSearchClick = () => setIsSearchModalOpen(true);
+  const handleSearchModalClose = () => setIsSearchModalOpen(false);
+
+  // Group posts by categories for section display
+  const getPostsByCategory = (category: string) => {
+    return posts.filter(post => 
+      post.categories?.some(cat => 
+        cat.toLowerCase().includes(category.toLowerCase())
+      )
+    ).slice(0, 3);
+  };
+
+  const designPosts = getPostsByCategory('design');
+  const techPosts = getPostsByCategory('tech') || getPostsByCategory('technology');
+  
+  // Fallback to recent posts if no category matches
+  const fallbackPosts = posts.slice(0, 6);
+
   return (
     <div className="bg-[#fceadd] text-black overflow-auto scrollbar-hide font-sans">
       <div className="h-screen border-b-2 border-black   flex flex-col">
@@ -28,7 +55,7 @@ const HomePageDesktop = () => {
         <a href="#" className="hover:underline">About</a>
         <a href="#" className="hover:underline">Project</a>
       </nav>
-      <button>
+      <button onClick={handleSearchClick} className="cursor-pointer ">
         <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7 mr-8"
@@ -62,36 +89,97 @@ const HomePageDesktop = () => {
     
   </div>
 
-<div className="h-screen border-b-1 border-black">
 
       {/* Content Sections */}
-      <section className="px-6 md:px-16 my-10">
-        <h3 className="font-bold text-lg mb-4">Design</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          <ArticleCard />
-          <ArticleCard />
-          <div className="hidden md:block">
-            <ArticleCard />
-          </div>
-        </div>
+      <section className="px-6 md:px-16 my-10 border-b-2 border-black">
+          <h3 className="font-bold text-lg mb-4">Design</h3>
+          
+          {/* Loading State */}
+          {isLoading && (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white border-2 border-black h-64 flex items-center justify-center">
+                  <Loader2 className="h-6 w-6 animate-spin" />
+                </div>
+              ))}
+            </div>
+          )}
 
-        <h3 className="font-bold text-lg mb-4">Technology</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          <ArticleCard />
-          <ArticleCard />
-          <div className="hidden md:block">
-            <ArticleCard />
-          </div>
-        </div>
-      </section>
+          {/* Error State */}
+          {error && (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-red-100 border-2 border-red-500 h-64 flex items-center justify-center">
+                  <AlertCircle className="h-6 w-6 text-red-600" />
+                </div>
+              ))}
+            </div>
+          )}
 
-      {/* See More Button */}
-      <div className="text-center mb-16">
-        <button className="bg-yellow-400 px-6 py-2 border-1 border-black shadow-[4px_4px_0px_0px_black] hover:shadow-[0px_0px_0_0_black] transition hover:translate-x-[3px] hover:translate-y-[3px]">
-          See More Articels
-        </button>
-      </div>
-</div>
+          {/* Design Articles Grid */}
+          {!isLoading && !error && (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+              {designPosts.length > 0 ? (
+                <>
+                  {designPosts.slice(0, 2).map((post, index) => (
+                    <ArticleCard key={index} post={post} />
+                  ))}
+                  <div className="hidden md:block">
+                    {designPosts[2] && <ArticleCard post={designPosts[2]} />}
+                  </div>
+                </>
+              ) : (
+                // Fallback to recent posts
+                <>
+                  {fallbackPosts.slice(0, 2).map((post, index) => (
+                    <ArticleCard key={index} post={post} />
+                  ))}
+                  <div className="hidden md:block">
+                    {fallbackPosts[2] && <ArticleCard post={fallbackPosts[2]} />}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Technology Section */}
+          <h3 className="font-bold text-lg mb-4">Technology</h3>
+          
+          {!isLoading && !error && (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+              {techPosts.length > 0 ? (
+                <>
+                  {techPosts.slice(0, 2).map((post, index) => (
+                    <ArticleCard key={index} post={post} />
+                  ))}
+                  <div className="hidden md:block">
+                    {techPosts[2] && <ArticleCard post={techPosts[2]} />}
+                  </div>
+                </>
+              ) : (
+                // Fallback to more recent posts
+                <>
+                  {fallbackPosts.slice(3, 5).map((post, index) => (
+                    <ArticleCard key={index} post={post} />
+                  ))}
+                  <div className="hidden md:block">
+                    {fallbackPosts[5] && <ArticleCard post={fallbackPosts[5]} />}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+        {/* See More Button - Exact same style as requested */}
+        <div className="text-center mb-16">
+          <button 
+            onClick={handleSearchClick}
+            className="bg-yellow-400 px-6 py-2 border-2 border-black shadow-[4px_4px_0px_0px_black] hover:shadow-[0px_0px_0_0_black] transition hover:translate-x-[3px] hover:translate-y-[3px] font-bold"
+            >
+            See More Articles
+          </button>
+        </div>
+            </section>
 <BrutalCarousel />
       <section className="h-100 border-1">
 
@@ -130,44 +218,16 @@ const HomePageDesktop = () => {
   </div>
 </section>
           
+      {/* Search Modal */}
+      <SearchModal open={isSearchModalOpen} onClose={handleSearchModalClose} />
+
       {/* Footer */}
       <footer className="px-6 py-4 border-black text-center bg-black text-white text-xs">
         © 2025 Centauryy. All rights reserved.
       </footer>
+
     </div>
   );
 };
-
-
-
-const ArticleCard = () => (
-  <div className="border border-black grayscale hover:grayscale-0 shadow-[5px_5px_0px_0px_black] hover:shadow-[0px_0px_0_0_black] hover:translate-x-[3px] hover:translate-y-[3px] transition overflow-hidden bg-white">
-  {/* Header tanggal */}
-  <div className="bg-gray-200 px-2 text-center py-1 border-b border-black text-xs font-mono">
-    14.05.25.html
-  </div>
-
-  {/* Gambar preview */}
-  <div className="w-full h-35 overflow-hidden border-b border-black">
-    <img
-      src="https://i.pinimg.com/736x/39/3b/a8/393ba8246897375c3c167a11a637b251.jpg"
-      alt="Article Preview"
-      className="w-full hover:bg-amber-300 h-full object-cover"
-    />
-  </div>
-
-  {/* Konten artikel */}
-  <div className="p-4">
-    <h4 className="text-sm font-bold tracking-widest text-black">HeaderArticle</h4>
-    <p className="text-xs mt-1 mb-3 text-gray-700">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>
-    <button className="bg-yellow-400 px-4 py-1 text-xs shadow-[3px_3px_0px_0px_black] hover:shadow-[0px_0px_0_0_black] border border-black hover:translate-x-[3px] hover:translate-y-[3px] transition">
-      More
-    </button>
-  </div>
-</div>
-
-);
 
 export default HomePageDesktop;

@@ -7,24 +7,24 @@ import { motion, AnimatePresence } from "framer-motion";
 const cards = [
   {
     id: 1,
-    title: "HeaderArticle 1",
-    image: "https://i.pinimg.com/736x/39/3b/a8/393ba8246897375c3c167a11a637b251.jpg",
+    title: "Dominasi ARM dan CXL: Masa Depan Infrastruktur Data Center",
+    image: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*jM6UsFttro0ZroYS.png",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Revolusi infrastruktur data center sedang berlangsung dengan dua teknologi fundamental yang mengubah paradigma...",
   },
   {
     id: 2,
-    title: "HeaderArticle 2",
-    image: "https://i.pinimg.com/736x/c4/e0/72/c4e072f141b24182f5679d291ceae392.jpg",
+    title: "Mengupas Inovasi AI NVIDIA 2025: Dari Blackwell hingga Nemotron",
+    image: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*Z0Y2DICSzMdrWVuh.png",
     description:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Tahun 2025 menjadi saksi keunggulan NVIDIA dalam lanskap kecerdasan buatan (AI). Dengan rilis teknologi revolusioner seperti GPU Blackwell dan Nemotron LLM, NVIDIA terus mendominasi panggung AI global. Dikenal..",
   },
   {
     id: 3,
-    title: "HeaderArticle 3",
-    image: "https://i.pinimg.com/736x/39/3b/a8/393ba8246897375c3c167a11a637b251.jpg",
+    title: "Dari Cloud ke Edge: Evolusi Produk AI NVIDIA di Tahun 2025",
+    image: "https://miro.medium.com/v2/resize:fit:786/format:webp/0*dfJZSeucAz2JaJV7.png",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Dalam beberapa tahun terakhir, dunia telah menyaksikan transformasi besar dalam cara teknologi kecerdasan buatan (AI) dijalankan dan...",
   },
 ];
 

@@ -1,7 +1,31 @@
 import React from "react";
 import Carousel from "./carousel";
+import SearchModal from "./SearchModal";
+import ArticleCard from "./cardArticel";
+import { useState } from "react";
+import useMediumPosts from "../../hooks/useMediumPosts";
+import { Loader2, AlertCircle, Search } from 'lucide-react';
 
 const HomePageMobile = () => {
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const { posts, isLoading, error } = useMediumPosts();
+
+  const handleSearchClick = () => setIsSearchModalOpen(true);
+  const handleSearchModalClose = () => setIsSearchModalOpen(false);
+
+  // Group posts by categories (menampilkan 3 per section di mobile)
+  const getPostsByCategory = (category: string) => {
+    return posts.filter(post => 
+      post.categories?.some(cat => 
+        cat.toLowerCase().includes(category.toLowerCase())
+      )
+    ).slice(0, 3);
+  };
+
+  const designPosts = getPostsByCategory('design');
+  const techPosts = getPostsByCategory('tech') || getPostsByCategory('technology');
+  const fallbackPosts = posts.slice(0, 6);
+  
   return (
     <div className="bg-[#fceade] text-black min-h-screen font-space">
       {/* Header */}
@@ -44,7 +68,9 @@ const HomePageMobile = () => {
           <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold font-space">Centauryy</h1>
 
           {/* Search Icon */}
-          <button>
+          <button
+            onClick={handleSearchClick}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -82,55 +108,64 @@ const HomePageMobile = () => {
   </div>
 </div>
 
-      <div className="border-t border-black px-4 py-6">
-        {['Design', 'Technology'].map((category) => (
-          <div key={category} className="mb-6">
-            <h3 className="font-bold text-lg mb-2">{category}</h3>
-            {[1, 2].map((_, idx) => (
-              <div
-                key={idx}
-                className="border border-black mb-4 shadow-[4px_4px_0_black] bg-white"
-              >
-                  <p className="text-[10px] text-gray-500 mt-2">dd.mm.yy.html</p>
-                  <img
-                    src="https://i.pinimg.com/736x/39/3b/a8/393ba8246897375c3c167a11a637b251.jpg"
-                    alt="Article Preview"
-                    className="w-full hover:bg-amber-300 hover:mask-b-from-0% hover:mask-b-to-0% mask-b-from-20% mask-b-to-80% h-40 object-cover"
-                  />
-                <div className="p-4">
-                  {/* Gambar Preview */}
+<div className="border-y-4 border-black">
 
-                  {/* Tanggal */}
-
-                  {/* Judul */}
-                  <h4 className="text-sm font-bold tracking-widest text-black mt-1">
-                    HeaderArticle
-                  </h4>
-
-                  {/* Deskripsi */}
-                  <p className="text-xs mt-1 mb-3 text-gray-700">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                  {/* Tombol */}
-                  <button className="bg-yellow-400 px-4 py-1 text-xs shadow-[2px_2px_0_black] hover:shadow-[0px_0px_0_0_black] border border-black hover:translate-x-[2px] hover:translate-y-[2px] transition">
-                    More
-                  </button>
+      {/* Mobile Sections */}
+      <section className="my-8">
+          <h3 className="font-bold text-center  text-lg mb-4">Design</h3>
+          
+          {/* Loading State */}
+          {isLoading && (
+            <div className="space-y-6 mb-8">
+              {[1, 2].map((i) => (
+                <div key={i} className="bg-white border-2 border-black h-28 flex items-center justify-center">
+                  <Loader2 className="h-5 w-5 animate-spin" />
                 </div>
+              ))}
+            </div>
+          )}
 
+          {/* Design Articles */}
+          {!isLoading && !error && (
+            <div className="space-y-6 mb-8"> {/* Mengubah grid menjadi space-y */}
+              {(designPosts.length > 0 ? designPosts : fallbackPosts.slice(0, 3)).map((post, index) => (
+                <ArticleCard key={index} post={post} variant="horizontal" />
+              ))}
+            </div>
+          )}
 
-              </div>
-            ))}
-          </div>
-        ))}
+          <h3 className="font-bold text-center text-lg mb-4">Technology</h3>
+          
+          {!isLoading && !error && (
+            <div className="space-y-6 mb-8"> {/* Mengubah grid menjadi space-y */}
+              {(techPosts.length > 0 ? techPosts : fallbackPosts.slice(3, 6)).map((post, index) => (
+                <ArticleCard key={index} post={post} variant="horizontal" />
+              ))}
+            </div>
+          )}
+        </section>
+        {/* --- AKHIR PERUBAHAN --- */}
 
-        <button className="btn w-full bg-yellow-400 border border-black shadow-[4px_4px_0_black] mt-4">
-          See More Articles
-        </button>
+        {/* See More Button - Mobile version (tetap sama) */}
+        <div className="text-center mx-2 mb-8">
+          <button 
+            onClick={handleSearchClick}
+            className="bg-yellow-400 px-6 py-2 border-2 border-black shadow-[4px_4px_0px_0px_black] hover:shadow-[0px_0px_0_0_black] transition hover:translate-x-[3px] hover:translate-y-[3px] font-bold w-full sm:w-auto"
+          >
+            See More Articles
+          </button>
+        </div>
       </div>
 
       {/* Carousel Section */}
-      <Carousel />
+      <div className="mb-8 mx-2">
+          <Carousel />
+        </div>
+      {/* Search Modal */}
+      <SearchModal 
+        open={isSearchModalOpen} 
+        onClose={handleSearchModalClose} 
+      />
 
       <div className="w-full px-4 py-4 text-center">
   <h2 className="text-xl font-bold font-mono uppercase">All CallBack User</h2>
