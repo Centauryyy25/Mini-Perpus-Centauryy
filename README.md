@@ -1,7 +1,7 @@
 <!-- Badge & Title -->
 <p align="center">
   <a href="https://mini-library-centauryy.vercel.app">
-    <img src="https://github.com/Centauryyy25/Mini-Perpus-Centauryy/raw/master/public/asset/logo.png)" alt="Mini Perpus Logo" width="120" />
+    <img src="[https://github.com/Centauryyy25/Mini-Perpus-Centauryy/raw/master/public/asset/logo.png)](https://github.com/Centauryyy25/Mini-Perpus-Centauryy/blob/master/public/asset/favicon.png?raw=true)" alt="Mini Perpus Logo" width="120" />
   </a>
 </p>
 
