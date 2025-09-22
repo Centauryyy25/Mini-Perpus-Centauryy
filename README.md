@@ -21,17 +21,9 @@
 
 ---
 
-## 🚀 Daftar Isi
+## 🌐 My Website 
 
-- [Fitur](#fitur)  
-- [Tampilan](#tampilan)  
-- [Teknologi](#teknologi)  
-- [Instalasi](#instalasi)  
-- [Struktur Proyek](#struktur-proyek)  
-- [Penggunaan](#penggunaan)  
-- [Kontribusi](#kontribusi)  
-- [Lisensi](#lisensi)  
-- [Kontak](#kontak)
+👉 [**Kunjungi Website**](https://yourwebsite.com)  
 
 ---
 
