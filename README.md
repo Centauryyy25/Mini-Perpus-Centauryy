@@ -8,7 +8,7 @@
 <h1 align="center">Mini-Perpus-Centauryy</h1>
 
 <p align="center">
-  A sleek & lightweight online library system built with Next.js, Tailwind CSS, and TypeScript.
+  Mini-Perpus-Centauryy adalah proyek pribadi yang saya buat sebagai wadah untuk menampung berbagai aspirasi, ide, maupun pemikiran yang muncul dalam bentuk artikel. Daripada tercecer di berbagai tempat, saya mencoba mengemasnya ke dalam bentuk mini library yang sederhana namun terstruktur.
 </p>
 
 <p align="center">
