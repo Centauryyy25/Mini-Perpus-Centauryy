@@ -40,7 +40,7 @@
 ## 🖼 Tampilan
 
 <p align="center">
-  <img src="https://github.com/Centauryyy25/Mini-Perpus-Centauryy/raw/master/public/asset/screenshot-home.png" alt="Screenshot Home" width="600" />
+  <img src="https://github.com/Centauryyy25/Mini-Perpus-Centauryy/blob/master/public/asset/mini-library-centauryy.vercel.app_(iPad%20Air).png?raw=true" alt="Screenshot Home" width="600" />
 </p>
 
 > Gambar di atas adalah contoh halaman beranda sistem perpustakaan.
