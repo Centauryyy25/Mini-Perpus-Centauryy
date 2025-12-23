@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-import Image from "next/image";
+
 
 const projects = [
     {
@@ -282,8 +282,8 @@ export default function ProjectsSection() {
                                 key={index}
                                 onClick={() => handleDotClick(index)}
                                 className={`w-3 h-3 border-2 border-black transition-all ${index === currentIndex
-                                        ? 'bg-yellow-400 scale-125'
-                                        : 'bg-white hover:bg-gray-200'
+                                    ? 'bg-yellow-400 scale-125'
+                                    : 'bg-white hover:bg-gray-200'
                                     }`}
                                 aria-label={`Go to slide ${index + 1}`}
                             />

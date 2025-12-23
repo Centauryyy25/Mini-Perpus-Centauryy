@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, BookOpen, Search, Filter, Clock } from "lucide-react";
+import { ArrowLeft, BookOpen, Search, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Research Articles | Centauryy Project",
@@ -125,7 +125,7 @@ export default function ArticlesPage() {
                         <Clock className="w-12 h-12 mx-auto mb-4" />
                         <h2 className="text-2xl font-bold mb-4">Full Archive Coming Soon</h2>
                         <p className="text-gray-800 mb-6">
-                            We're building a comprehensive article archive with advanced search,
+                            We&apos;re building a comprehensive article archive with advanced search,
                             filtering, and reading features. Stay tuned!
                         </p>
                         <Link
