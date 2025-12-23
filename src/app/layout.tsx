@@ -19,10 +19,23 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Centauryy Project",
-  description: "For the personal Library",
+  title: "Centauryy Project | Articles & Resources",
+  description: "Your dreams aren't too big — just unexplored. Discover articles and resources to guide your steps to the world out there.",
+  keywords: ["articles", "resources", "technology", "design", "learning"],
+  authors: [{ name: "Centauryy" }],
+  openGraph: {
+    title: "Centauryy Project | Articles & Resources",
+    description: "Your dreams aren't too big — just unexplored. Discover articles and resources.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Centauryy Project",
+    description: "Articles & Resources for the curious mind",
+  },
   icons: {
-    icon: "../../public/asset/favicon.png", // atau favicon.png/svg jika kamu pakai format lain
+    icon: "/asset/favicon.png",
   },
 };
 
@@ -32,9 +45,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}>
-      <link rel="icon" href="../../public/asset/favicon.png" />
-      <body className="font-space">{children}</body>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-space antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

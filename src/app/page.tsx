@@ -2,7 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import useIsMobile from "../../hooks/useIsMobile";
+import useIsMobile from "@/hooks/useIsMobile";
 
 // Fixed component imports - they were swapped
 const Desktop = dynamic(() => import("./pageDesktop"));
