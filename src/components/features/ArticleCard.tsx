@@ -2,7 +2,7 @@
 "use client";
 
 import { ExternalLink } from 'lucide-react';
-import { MediumPost } from './types'; // Fix import path
+import { MediumPost } from '@/types';
 import Image from 'next/image'; // ← ADD THIS IMPORT
 
 interface ArticleCardProps {
@@ -26,10 +26,10 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { 
-        month: 'short', 
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
         day: 'numeric',
-        year: 'numeric' 
+        year: 'numeric'
       });
     } catch {
       return 'Recent';
@@ -45,7 +45,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
   // Varian Horizontal untuk Mobile
   if (variant === 'horizontal') {
     return (
-      <div 
+      <div
         onClick={handleCardClick}
         className={`
           group relative flex items-start space-x-3 bg-white cursor-pointer
@@ -58,8 +58,8 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
         {/* FIX LINE 59: Thumbnail with Next.js Image */}
         <div className="flex-shrink-0 w-24 h-24 border-2 border-black overflow-hidden relative">
           {articleData.image ? (
-            <Image 
-              src={articleData.image} 
+            <Image
+              src={articleData.image}
               alt={articleData.title}
               fill
               className="object-cover"
@@ -91,7 +91,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
 
   // Default variant
   return (
-    <div 
+    <div
       onClick={handleCardClick}
       className={`
         group relative overflow-hidden bg-white cursor-pointer
@@ -104,8 +104,8 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
       {/* FIX LINE 100: Image Container with Next.js Image */}
       <div className="relative h-40 overflow-hidden">
         {articleData.image ? (
-          <Image 
-            src={articleData.image} 
+          <Image
+            src={articleData.image}
             alt={articleData.title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -117,7 +117,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
             <div className="text-4xl">📖</div>
           </div>
         )}
-        
+
         {/* Brutal overlay badge */}
         <div className="absolute top-2 right-2 bg-yellow-400 border-2 border-black px-2 py-1 text-xs font-bold uppercase tracking-wider">
           NEW
@@ -129,7 +129,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
         <h3 className="font-bold text-lg text-black mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {articleData.title}
         </h3>
-        
+
         <p className="text-gray-700 text-sm mb-3 line-clamp-2">
           {articleData.excerpt}
         </p>
@@ -138,7 +138,7 @@ export default function ArticleCard({ post, variant = 'default', className = '' 
         {articleData.categories && articleData.categories.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-3">
             {articleData.categories.slice(0, 2).map((category, index) => (
-              <span 
+              <span
                 key={index}
                 className="inline-block bg-black text-white text-xs font-bold px-2 py-1 uppercase tracking-wider"
               >

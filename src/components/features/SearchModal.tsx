@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 import Fuse from 'fuse.js';
-import useMediumPosts from '../../hooks/useMediumPosts';
+import useMediumPosts from '@/hooks/useMediumPosts';
 import { Search, X, Calendar, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
 
 interface SearchModalProps {
@@ -65,7 +65,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
       onClose();
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setFocusedIndex(prev => 
+      setFocusedIndex(prev =>
         prev < results.length - 1 ? prev + 1 : prev
       );
     } else if (e.key === 'ArrowUp') {
@@ -81,10 +81,10 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { 
-        month: 'short', 
-        day: 'numeric', 
-        year: 'numeric' 
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
       });
     } catch {
       return '';
@@ -96,14 +96,14 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
-      
+
       {/* Modal */}
       <div className="flex min-h-full items-start justify-center p-4 pt-16">
-        <div 
+        <div
           className="relative w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white shadow-2xl transition-all"
           onKeyDown={handleKeyDown}
         >
@@ -125,7 +125,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                   autoComplete="off"
                 />
               </div>
-              
+
               <button
                 onClick={onClose}
                 className="flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
@@ -133,7 +133,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            
+
             {/* Search stats */}
             {query && !isLoading && (
               <div className="mt-2 text-sm text-gray-500">
@@ -194,16 +194,15 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                     </h3>
                   </div>
                 )}
-                
+
                 {results.map((post, index) => (
                   <div key={index}>
                     <a
                       href={post.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`block px-6 py-4 hover:bg-gray-50 transition-colors ${
-                        focusedIndex === index ? 'bg-blue-50 border-r-2 border-blue-500' : ''
-                      }`}
+                      className={`block px-6 py-4 hover:bg-gray-50 transition-colors ${focusedIndex === index ? 'bg-blue-50 border-r-2 border-blue-500' : ''
+                        }`}
                       onMouseEnter={() => setFocusedIndex(index)}
                     >
                       <div className="flex items-start justify-between">
@@ -214,7 +213,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                           <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                             {post.excerpt}
                           </p>
-                          
+
                           <div className="flex items-center space-x-4 text-xs text-gray-500">
                             {post.date && (
                               <div className="flex items-center space-x-1">
@@ -222,7 +221,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                                 <span>{formatDate(post.date)}</span>
                               </div>
                             )}
-                            
+
                             {post.categories && post.categories.length > 0 && (
                               <div className="flex items-center space-x-1">
                                 <span>•</span>
@@ -233,7 +232,7 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
                             )}
                           </div>
                         </div>
-                        
+
                         <div className="ml-4 flex-shrink-0">
                           <ExternalLink className="h-4 w-4 text-gray-400" />
                         </div>

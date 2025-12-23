@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MediumPost, UseMediumPostsReturn } from '../src/app/types';
+import { MediumPost, UseMediumPostsReturn } from '@/types';
 
 export default function useMediumPosts(): UseMediumPostsReturn {
   const [posts, setPosts] = useState<MediumPost[]>([]);
@@ -13,15 +13,15 @@ export default function useMediumPosts(): UseMediumPostsReturn {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         const response = await fetch('/api/medium');
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
+
         if (mounted) {
           setPosts(data.items || []);
         }
