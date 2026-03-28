@@ -1,4 +1,4 @@
-# Centauryy Project
+# Centauryy Library
 
 A modern, brutalist-styled web application for articles and resources. Built with Next.js 15, React 19, and Tailwind CSS with DaisyUI.
 
