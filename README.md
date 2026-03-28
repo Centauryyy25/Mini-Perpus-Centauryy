@@ -1,126 +1,89 @@
-# Centauryy Library
+<h1 align="center">📚 Centauryy Library</h1>
 
-A modern, brutalist-styled web application for articles and resources. Built with Next.js 15, React 19, and Tailwind CSS with DaisyUI.
+<p align="center">
+  <b>A personal knowledge hub for curated tech articles and research notes</b><br/>
+  <sub>Neobrutalist design · Medium RSS integration · Fuzzy search · Responsive</sub>
+</p>
 
-![Design Style: Neobrutalism](https://img.shields.io/badge/Design-Neobrutalism-facc15)
-![Next.js 15](https://img.shields.io/badge/Next.js-15.3.2-black)
-![React 19](https://img.shields.io/badge/React-19-blue)
+<p align="center">
+  <img src="https://img.shields.io/badge/Design-Neobrutalism-facc15?style=for-the-badge" alt="Neobrutalism"/>
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind"/>
+</p>
 
-## 🚀 Features
+<p align="center">
+  <a href="https://mini-library-centauryy.vercel.app"><b>🔗 Live Site</b></a> · <a href="https://medium.com/@centauryy"><b>✍️ Medium Blog</b></a>
+</p>
 
-- **Neobrutalist Design** - Bold, high-contrast design with thick borders and hard shadows
-- **Responsive Layout** - Separate optimized views for desktop and mobile
-- **Medium RSS Integration** - Automatically fetches articles from Medium
-- **Fuzzy Search** - Fast article search using Fuse.js
-- **Smooth Animations** - Framer Motion powered animations
-- **Skeleton Loading** - Professional loading states for better UX
-- **SEO Optimized** - Comprehensive meta tags and Open Graph support
+<!--
+🖼️ SCREENSHOT — Uncomment after adding
 
-## 📁 Project Structure
+<p align="center">
+  <img src="docs/screenshots/home.png" width="70%" alt="Homepage" />
+</p>
+-->
 
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── api/               # API Routes
-│   │   └── medium/        # Medium RSS feed endpoint
-│   ├── globals.css        # Global styles & design system
-│   ├── layout.tsx         # Root layout with metadata
-│   ├── page.tsx           # Home page (responsive router)
-│   ├── pageDesktop.tsx    # Desktop-specific layout
-│   └── pageMobile.tsx     # Mobile-specific layout
-├── components/            # React Components
-│   ├── features/          # Feature components
-│   │   ├── ArticleCard.tsx
-│   │   ├── Carousel.tsx
-│   │   └── SearchModal.tsx
-│   ├── ui/                # UI primitives
-│   │   ├── Animations.tsx
-│   │   ├── Button.tsx
-│   │   └── Skeleton.tsx
-│   └── layout/            # Layout components
-├── hooks/                 # Custom React hooks
-│   ├── useIsMobile.ts     # Responsive detection (SSR-safe)
-│   └── useMediumPosts.ts  # Medium posts fetcher
-├── lib/                   # Utilities
-│   └── utils.ts           # Helper functions
-└── types/                 # TypeScript definitions
-    └── index.ts
-```
+---
 
-## 🛠️ Tech Stack
+## About
+
+This is my personal digital library — a place to organize articles, research notes, and ideas about technology topics I'm actively exploring: data center infrastructure, AI/ML, cloud architecture, and modern web development.
+
+Articles are written and published on [Medium](https://medium.com/@centauryy), then automatically pulled into this site via RSS feed integration.
+
+## Features
+
+| Feature | How It Works |
+|---------|-------------|
+| **Medium RSS Integration** | API route fetches and parses the Medium RSS feed, keeping content in sync automatically |
+| **Fuzzy Search** | Fuse.js-powered search across titles, excerpts, and categories — typo-tolerant |
+| **Neobrutalist UI** | Intentional design system: thick borders, hard shadows, high-contrast colors, hover translate effects |
+| **Responsive Views** | SSR-safe `useIsMobile` hook serves separate optimized layouts for desktop and mobile |
+| **Smooth Animations** | Framer Motion page transitions and scroll-triggered reveals |
+| **Skeleton Loading** | Content-aware loading states that match the final layout |
+| **SEO Optimized** | Full meta tags, Open Graph, and structured layout metadata |
+
+## Tech Stack
 
 | Category | Technology |
-|----------|------------|
+|----------|-----------|
 | Framework | Next.js 15 (App Router + Turbopack) |
-| UI Library | React 19 |
+| UI | React 19 |
 | Styling | Tailwind CSS 4 + DaisyUI 5 |
 | Animations | Framer Motion |
 | Search | Fuse.js |
 | Data Fetching | SWR |
 | Icons | Lucide React |
 | Language | TypeScript 5 |
+| Deployment | Vercel |
 
-## 🏃 Getting Started
+## Design System
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+The UI follows a strict neobrutalist aesthetic:
 
-### Installation
+```
+Colors                          Shadows
+─────────────────               ─────────────────────────────
+cream:    #FCEEE3  (bg)         sm:  3px 3px 0px 0px black
+yellow:   #facc15  (accent)     md:  4px 4px 0px 0px black
+black:    #000000  (border)     lg:  6px 6px 0px 0px black
 
-```bash
-# Clone the repository
-git clone <repository-url>
-
-# Navigate to project
-cd centauryy-perpus
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+Rules
+─────────────────────────────────────────────────────────────
+• Borders: 2px+ solid black on all interactive elements
+• Shadows: Hard-edged, no blur, no spread
+• Hover: translateX(-2px) translateY(-2px) + shadow grow
+• Typography: Bold, high-contrast, no subtlety
 ```
 
-### Available Scripts
+## API
 
-```bash
-npm run dev      # Start dev server with Turbopack
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
-```
+### `GET /api/medium`
 
-## 🎨 Design System
+Fetches and parses articles from the configured Medium RSS feed.
 
-### Colors
-| Token | Value | Usage |
-|-------|-------|-------|
-| `cream` | `#FCEEE3` | Background |
-| `brutal-yellow` | `#facc15` | Accent/CTA |
-| `brutal-black` | `#000000` | Borders/Text |
-
-### Shadows
-```css
---shadow-brutal: 4px 4px 0px 0px black;
---shadow-brutal-sm: 3px 3px 0px 0px black;
---shadow-brutal-lg: 6px 6px 0px 0px black;
-```
-
-### Components
-
-All components follow the brutalist design principles:
-- **Thick borders** (2px+ black)
-- **Hard shadows** (no blur)
-- **High contrast** colors
-- **Interactive hover states** with translate effect
-
-## 📝 API Endpoints
-
-### GET /api/medium
-Fetches and parses RSS feed from Medium.
-
-**Response:**
 ```json
 {
   "items": [
@@ -128,7 +91,7 @@ Fetches and parses RSS feed from Medium.
       "title": "Article Title",
       "link": "https://medium.com/...",
       "date": "2025-01-01T00:00:00.000Z",
-      "categories": ["technology", "design"],
+      "categories": ["technology", "infrastructure"],
       "excerpt": "Article excerpt...",
       "image": "https://..."
     }
@@ -136,38 +99,64 @@ Fetches and parses RSS feed from Medium.
 }
 ```
 
-## 🔧 Configuration
+## Getting Started
 
-### Environment Variables
-Create a `.env` file in the root:
-```env
-# Add your environment variables here
+```bash
+git clone https://github.com/Centauryyy25/Mini-Perpus-Centauryy.git
+cd Mini-Perpus-Centauryy
+npm install
+npm run dev
 ```
 
-### Next.js Config
-The `next.config.ts` includes:
-- Remote image patterns for Medium and Pinterest
-- Package import optimizations
-- Production console removal
+Open [http://localhost:3000](http://localhost:3000).
 
-## 📱 Responsive Design
+## Project Structure
 
-The app uses a custom `useIsMobile` hook for SSR-safe responsive detection:
-- **Desktop**: Full layout with carousel previews
-- **Mobile**: Simplified, touch-friendly interface
+```
+src/
+├── app/
+│   ├── api/medium/        # Medium RSS feed endpoint
+│   ├── globals.css        # Design system tokens
+│   ├── layout.tsx         # Root layout + metadata
+│   ├── page.tsx           # Responsive page router
+│   ├── pageDesktop.tsx    # Desktop layout
+│   └── pageMobile.tsx     # Mobile layout
+├── components/
+│   ├── features/          # ArticleCard, Carousel, SearchModal
+│   ├── ui/                # Button, Skeleton, Animations
+│   └── layout/            # Navigation, Footer
+├── hooks/
+│   ├── useIsMobile.ts     # SSR-safe responsive detection
+│   └── useMediumPosts.ts  # SWR-based article fetcher
+├── lib/                   # Utilities
+└── types/                 # TypeScript definitions
+```
 
-## 🤝 Contributing
+## Topics I Write About
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Data Center & Cloud Infrastructure
+- AI/ML Systems & NVIDIA Ecosystem
+- ARM Architecture & CXL Memory
+- Modern Web Technologies
+- Hardware Innovation
 
-## 📄 License
+## Contributing
 
-This project is private. All rights reserved.
+```bash
+git checkout -b feature/your-feature
+git commit -m "feat: add your feature"
+git push origin feature/your-feature
+```
+
+Open a Pull Request with a clear description.
+
+## License
+
+All rights reserved.
 
 ---
 
-Built with ❤️ by Centauryy
+<p align="center">
+  Built by <a href="https://www.linkedin.com/in/ilham-ahsan-saputra/"><b>Ilham Ahsan Saputra</b></a><br/>
+  <sub>Computer Science Student · Junior Network Engineer · <a href="https://medium.com/@centauryy">Tech Writer</a></sub>
+</p>
