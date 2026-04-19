@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     icon: "/asset/favicon.png",
   },
   verification: {
-    google: "google228f01274b7b5e36",
+    google: "XoLf2K8Lt-9t3pX7m4HCArL-teuL_M_KSk1WYTwxf1U",
   },
 };
 
